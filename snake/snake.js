@@ -9,10 +9,8 @@ const snake_border_color = 'black';
 
 // dynamic variables used in game
 let score = 0;
-let food_x;
-let food_y;
-let snake_dx;
-let snake_dy;
+let food_x, food_y;
+let snake_dx, snake_dy;
 
 // array used to hold snake position
 let snake = [
@@ -36,9 +34,11 @@ function initialize() {
 
 // main game loop 
 function gameLoop(timeStamp) {
+    
     drawCanvas();
     makeSnake();
     drawFood();
+    advanceSnake();
 
     window.requestAnimationFrame(gameLoop);
 }
@@ -85,8 +85,17 @@ function drawFood() {
     context.fillRect(food_x, food_y, 20, 20);
 }
 
+// moves snake forward
 function advanceSnake() {
+    const snake_head = getSnakeHead();
+    snake.unshift(snake_head);
+    makeSnake();
+}
 
+// returns first snake element according to its direction 
+function getSnakeHead() {
+    return ({x: snake[0].x + snake_dx, 
+            y: snake[0].y + snake_dy});
 }
 
 
