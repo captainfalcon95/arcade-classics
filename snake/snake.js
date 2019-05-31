@@ -1,12 +1,18 @@
-
-// constant variables used in game
+// const variables used in game
 const game_canvas = document.getElementById("game_canvas");
-const ctx = game_canvas.getContext("2d");
+const context = game_canvas.getContext("2d");
 const canvas_background_color = 'black';
 const canvas_border_color = 'white';
 const food_color = 'red';
 const snake_color = 'green';
 const snake_border_color = 'black'; 
+
+// dynamic variables used in game
+let score = 0;
+let food_x;
+let food_y;
+let snake_dx;
+let snake_dy;
 
 // array used to hold snake position
 let snake = [
@@ -17,25 +23,32 @@ let snake = [
     {x:300, y:120}
 ]
 
-// draw the canvas where game takes place
-ctx.fillStyle = canvas_background_color;
-ctx.strokeStyle = canvas_border_color;
-ctx.fillRect(0, 0, game_canvas.width, game_canvas.height);
-ctx.strokeRect(0, 0, game_canvas.width, game_canvas.height);
+// initialize the game when window has loaded
+window.onload = initialize; 
 
-// main game loop 
-function gameLoop() {
-    makeFood();
-    makeSnake();
+// set up and begin main game loop
+function initialize() {
+    // generates first set of food coordinates
+    makeFoodCoordinates();
+
+    window.requestAnimationFrame(gameLoop);
 }
 
+// main game loop 
+function gameLoop(timeStamp) {
+    drawCanvas();
+    makeSnake();
+    drawFood();
 
-// draw food in random location on canvas
-function makeFood() {
-    x_coordinate = Math.floor(Math.random()*58) *10;
-    y_coordinate = Math.floor(Math.random()*38) * 10;
-    ctx.fillStyle = food_color;
-    ctx.fillRect(x_coordinate, y_coordinate, 20, 20);
+    window.requestAnimationFrame(gameLoop);
+}
+
+// draw canvas where game takes place
+function drawCanvas() {
+    context.fillStyle = canvas_background_color;
+    context.strokeStyle = canvas_border_color;
+    context.fillRect(0, 0, game_canvas.width, game_canvas.height);
+    context.strokeRect(0, 0, game_canvas.width, game_canvas.height);
 }
 
 // call drawSnake function on each element in snake array
@@ -43,12 +56,37 @@ function makeSnake() {
     snake.forEach(drawSnake);
 }
 
-
 // draw the snake element passed from array 
 function drawSnake(part) {
-    ctx.fillStyle = snake_color;
-    ctx.strokeStyle = snake_border_color;
-    ctx.fillRect(part.x, part.y, 20, 20);
-    ctx.strokeRect(part.x, part.y, 20, 20);
+    context.fillStyle = snake_color;
+    context.strokeStyle = snake_border_color;
+    context.fillRect(part.x, part.y, 20, 20);
+    context.strokeRect(part.x, part.y, 20, 20);
 }
+
+// returns x and y coordinates for food
+function makeFoodCoordinates() {
+    food_x = Math.floor(Math.random()*58) *10;
+    food_y = Math.floor(Math.random()*38) * 10;
+    
+    // pass each part of snake to isFoodOnSnakeFunction
+    snake.forEach(isFoodOnSnake);
+}
+
+// check if food coordinates are on any part of the snake
+function isFoodOnSnake(part) {
+    const foodIsOnSnake = part.x == food_x && part.y == food_y;
+    if (foodIsOnSnake) makeFoodCoordinates();
+}
+
+// draw food in random location on canvas
+function drawFood() {
+    context.fillStyle = food_color;
+    context.fillRect(food_x, food_y, 20, 20);
+}
+
+function advanceSnake() {
+
+}
+
 
