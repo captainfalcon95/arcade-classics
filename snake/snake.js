@@ -15,6 +15,7 @@ let snake = [
 function gameLoop() {
     makeFood();
     makeSnake();
+    moveSnake();
 }
 
 function makeFood() {
@@ -28,10 +29,10 @@ function makeFood() {
 }
 
 function makeSnake() {
-    snake.forEach(drawSnakePart);
+    snake.forEach(drawSnake);
 }
 
-function drawSnakePart(part) {
+function drawSnake(part) {
     ctx.strokeStyle = "black";
     ctx.fillStyle = "green";
     ctx.strokeRect(part.x, part.y, 20, 20);
