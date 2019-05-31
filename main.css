@@ -1,3 +1,5 @@
+
+/**** base html styles ****/
 html {
     font-size: 16px;
 }
@@ -11,6 +13,7 @@ h1 {
     font-size: 5rem;
 }
 
+/**** index.html styles ****/
 .header-container {
     height: 100vh;
     width: 100vw;
@@ -32,3 +35,18 @@ h1 {
     margin: 2rem 1rem;
     font-size: 2rem;
 }
+
+/**** game page styles ****/
+.game_container {
+    width: 100vw;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game_score_container {
+    margin-bottom: 2rem;
+}
+
