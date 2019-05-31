@@ -10,8 +10,10 @@ function gameLoop() {
 }
 
 function makeFood() {
-    x_coordinate = Math.floor(Math.random() * ((57-0) + 0) * 10);
-    y_coordinate = Math.floor(Math.random() * ((38-0) + 0) * 10);
+    x_coordinate = Math.floor(Math.random()*58) *10;
+    y_coordinate = Math.floor(Math.random()*38) * 10;
+
+    console.log(x_coordinate, y_coordinate);
 
     ctx.strokeStyle = "red";
     ctx.fillStyle = "red";
