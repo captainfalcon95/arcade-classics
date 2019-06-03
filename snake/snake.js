@@ -7,7 +7,7 @@ let food_x, food_y;
 let snake_dx = 0;
 let snake_dy = -20;
 
-// const variables used in game
+// variables used in game
 const game_canvas = document.getElementById("game_canvas");
 const context = game_canvas.getContext("2d");
 const canvas_background_color = 'black';
@@ -15,22 +15,20 @@ const canvas_border_color = 'white';
 const food_color = 'red';
 const snake_color = 'green';
 const snake_border_color = 'black'; 
+
+// variables used for key codes 
 const LEFT_KEY = 37;
 const RIGHT_KEY = 39;
 const UP_KEY = 38;
 const DOWN_KEY = 40;
-const goingUp = snake_dy === -20;
-const goingDown = snake_dy === 20;
-const goingRight = snake_dx === 20;
-const goingLeft = snake_dx === -20;
 
 // array used to hold snake position
 let snake = [
-    {x:300, y:200},
-    {x:300, y:180},
-    {x:300, y:160},
+    {x:300, y:120},
     {x:300, y:140},
-    {x:300, y:120}
+    {x:300, y:160},
+    {x:300, y:180},
+    {x:300, y:200}
 ]
 
 // initialize the game when window has loaded
@@ -40,17 +38,15 @@ window.onload = initialize;
 function initialize() {
     // generates first set of food coordinates
     makeFoodCoordinates();
-    document.addEventListener("keydown", changeDirection);
     window.requestAnimationFrame(gameLoop);
 }
 
 // main game loop 
 function gameLoop(timeStamp) {
     setTimeout(function(){
-        changing_direction = false;
         drawCanvas();
-        makeSnake();
         drawFood();
+        makeSnake();
         advanceSnake();
  
         window.requestAnimationFrame(gameLoop);
@@ -71,7 +67,7 @@ function makeSnake() {
 }
 
 // draw the snake element passed from array 
-function drawSnake(part) {
+function drawSnake(part) { 
     context.fillStyle = snake_color;
     context.strokeStyle = snake_border_color;
     context.fillRect(part.x, part.y, 20, 20);
@@ -114,34 +110,7 @@ function getSnakeHead() {
 }
 
 function changeDirection(event) {
-    if(changing_direction) return;
-    changing_direction = true;
-    console.log('event detected');
 
-    const keyPressed = event.keyCode;
-    console.log(event.keyCode);
-    switch (true) {
-        case keyPressed === LEFT_KEY && !goingRight:
-            snake_dx = -20;
-            snake_dy = 0;
-            console.log(!goingRight);
-        break;
-        case keyPressed === RIGHT_KEY && !goingLeft:
-            snake_dx = 20;
-            snake_dy = 0;
-            console.log('changing direction');
-        break;
-        case keyPressed === UP_KEY && !goingDown:
-            snake_dx = 0;
-            snake_dy = -20;
-            console.log('changing direction');
-        break;
-        case keyPressed === DOWN_KEY && !goingUp:
-            snake_dx = 0;
-            snake_dy = 20;
-            console.log('changing direction');
-        break;
-    }
 }
 
 
