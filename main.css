@@ -13,6 +13,21 @@ h1 {
     font-size: 5rem;
 }
 
+h2 {
+    font-size: 4.5rem;
+}
+
+h3 {
+    font-size: 4rem;
+}
+
+h4 {
+    font-size: 3.5rem;
+}
+
+h5 {
+    font-size: 3rem;
+}
 /**** index.html styles ****/
 .header-container {
     height: 100vh;
@@ -48,5 +63,9 @@ h1 {
 
 .game_score_container {
     margin-bottom: 2rem;
+}
+
+#finalScore {
+    margin: 2rem;
 }
 
