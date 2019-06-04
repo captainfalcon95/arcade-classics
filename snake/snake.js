@@ -38,7 +38,7 @@ function initialize() {
         {x:300, y:220},
         {x:300, y:240},
         {x:300, y:260},
-        {x:300, y:280}
+        {x:300, y:180}
     ]
     // generates first set of food coordinates
     makeFoodCoordinates();
